@@ -18,6 +18,6 @@ class ProtospacesController < ApplicationController
     private
     def prototype_params
         #devise導入後にuser_idをmergeで付け加える
-        params.require(:prototype).permit(:title, :catch_copy, :concept)
+        params.require(:prototype).permit(:title, :catch_copy, :concept).merge(user_id: current_user.id)
     end
 end
