@@ -1,9 +1,9 @@
 class ProtospacesController < ApplicationController
     def index
-        @prototypes = Prototype.all        
+        @prototypes = Prototype.includes(:user)      
     end
     def new
-        @protospace = Prototype.new
+        @prototype = Prototype.new
     end
     def create
         @prototype = Prototype.create(prototype_params)
@@ -12,7 +12,6 @@ class ProtospacesController < ApplicationController
         else
             render :new, status: unprocessable_entity
         end
-        
     end
 
     def edit
@@ -28,6 +27,6 @@ class ProtospacesController < ApplicationController
     private
     def prototype_params
         #devise導入後にuser_idをmergeで付け加える
-        params.require(:prototype).permit(:title, :catch_copy, :concept).merge(user_id: current_user.id)
+        params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
     end
 end
