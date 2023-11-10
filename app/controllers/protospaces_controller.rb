@@ -3,7 +3,7 @@ class ProtospacesController < ApplicationController
         @prototypes = Prototype.all        
     end
     def new
-        @prototype = Prototype.new
+        @protospace = Prototype.new
     end
     def create
         @prototype = Prototype.create(prototype_params)
