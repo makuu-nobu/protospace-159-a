@@ -1,9 +1,9 @@
 class ProtospacesController < ApplicationController
     def index
-        @prototypes = Prototype.all        
+        @prototypes = Prototype.includes(:user)      
     end
     def new
-        @protospace = Prototype.new
+        @prototype = Prototype.new
     end
     def create
         @prototype = Prototype.create(prototype_params)
@@ -12,7 +12,6 @@ class ProtospacesController < ApplicationController
         else
             render :new, status: unprocessable_entity
         end
-        
     end
 
     private
