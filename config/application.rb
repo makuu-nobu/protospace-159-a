@@ -10,11 +10,7 @@ module Protospace159A
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
-<<<<<<< Updated upstream
-=======
     config.active_storage.variant_processor = :mini_magick
->>>>>>> Stashed changes
-
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
