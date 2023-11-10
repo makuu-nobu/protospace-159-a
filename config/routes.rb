@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'protospaces#index'
-  resources :protospaces, only: [:index, :new, :create, :show]
+  resources :protospaces, as: 'prototypes'
   resources :users, only: [:show]
 end
