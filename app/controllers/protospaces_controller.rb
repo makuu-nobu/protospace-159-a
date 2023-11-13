@@ -15,6 +15,10 @@ class ProtospacesController < ApplicationController
             render :new
         end
     end
+    def show
+        @prototype = Prototype.find(params[:id]) 
+        
+    end
 
     def show
         @prototype = Prototype.find(params[:id])        
