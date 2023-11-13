@@ -21,6 +21,7 @@ class ProtospacesController < ApplicationController
     end
 
     def show
+        @comment = Comment.new
         @prototype = Prototype.find(params[:id])        
     end
 
