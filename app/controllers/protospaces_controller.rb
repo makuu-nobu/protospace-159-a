@@ -10,7 +10,7 @@ class ProtospacesController < ApplicationController
         if @prototype.save
             redirect_to root_path          
         else
-            render :new, status: unprocessable_entity
+            render :new
         end
         
     end
