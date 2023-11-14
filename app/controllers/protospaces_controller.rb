@@ -15,14 +15,11 @@ class ProtospacesController < ApplicationController
             render :new
         end
     end
-    def show
-        @prototype = Prototype.find(params[:id]) 
-        
-    end
 
     def show
+        @prototype = Prototype.find(params[:id])    
         @comment = Comment.new
-        @prototype = Prototype.find(params[:id])        
+        @comments = @prototype.comments.includes(:user)    
     end
 
     def edit
@@ -33,6 +30,12 @@ class ProtospacesController < ApplicationController
         prototype = Prototype.find(params[:id])
         prototype.update(prototype_params)
         redirect_to root_path
+    end
+
+    def destroy
+        prototype = Prototype.find(params[:id])
+        prototype.destroy
+        redirect_to root_path        
     end
 
     private
