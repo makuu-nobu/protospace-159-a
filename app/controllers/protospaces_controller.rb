@@ -1,4 +1,5 @@
 class ProtospacesController < ApplicationController
+    before_action :set_prototype, only: [:edit, :show]
     before_action :move_to_index, except: [:index, :show]
 
     def index
@@ -17,19 +18,23 @@ class ProtospacesController < ApplicationController
     end
 
     def show
-        @prototype = Prototype.find(params[:id])    
         @comment = Comment.new
         @comments = @prototype.comments.includes(:user)    
     end
 
     def edit
-        @prototype = Prototype.find(params[:id])
+        if current_user != @prototype.user
+            redirect_to root_path
+        end
     end
 
     def update
         prototype = Prototype.find(params[:id])
-        prototype.update(prototype_params)
-        redirect_to root_path
+        if prototype.update(prototype_params)
+            redirect_to prototype_path(params[:id])
+        else
+            render :edit
+        end
     end
 
     def destroy
@@ -47,5 +52,9 @@ class ProtospacesController < ApplicationController
         unless user_signed_in?
             redirect_to new_user_session_path
         end      
+    end
+
+    def set_prototype
+        @prototype = Prototype.find(params[:id])
     end
 end
