@@ -1,7 +1,11 @@
 class CommentsController < ApplicationController
     def create
-        comment = Comment.create(comments_params)
-        redirect_to "/protospaces/#{comment.prototype.id}"
+        @comment = Comment.create(comments_params)
+        if @comment.save
+            redirect_to "/protospaces/#{@comment.prototype.id}"
+        else
+            redirect_to "/protospaces/#{@comment.id}" , status: :unprocessable_entity
+        end
     end
 
     private

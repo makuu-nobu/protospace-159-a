@@ -13,7 +13,7 @@ class ProtospacesController < ApplicationController
         if @prototype.save
             redirect_to root_path          
         else
-            render :new
+            render :new, status: :unprocessable_entity
         end
     end
 
@@ -29,11 +29,11 @@ class ProtospacesController < ApplicationController
     end
 
     def update
-        prototype = Prototype.find(params[:id])
-        if prototype.update(prototype_params)
+        @prototype = Prototype.find(params[:id])
+        if @prototype.update(prototype_params)
             redirect_to prototype_path(params[:id])
         else
-            render :edit
+            render :edit, status: :unprocessable_entity
         end
     end
 
