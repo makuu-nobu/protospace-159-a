@@ -21,7 +21,7 @@ class ProtospacesController < ApplicationController
         @comment = Comment.new
         @comments = @prototype.comments.includes(:user)    
     end
-
+    
     def edit
         if current_user != @prototype.user
             redirect_to root_path
